@@ -130,6 +130,7 @@ class PaystackPlugin {
     bool hideAmount = false,
     bool isDarkMode = false,
     Color? darkModeTextColor,
+    Color? buttonColor,
   }) async {
     return _Paystack(publicKey).checkout(
       context,
@@ -141,6 +142,7 @@ class PaystackPlugin {
       hideEmail: hideEmail,
       darkModeTextColor: darkModeTextColor,
       isDarkMode: isDarkMode,
+      buttonColor: buttonColor,
     );
   }
 
@@ -171,6 +173,7 @@ class _Paystack {
     Widget? logo,
     bool isDarkMode = false,
     Color? darkModeTextColor,
+    Color? buttonColor,
   }) async {
     mIsDarkMode = isDarkMode;
     mDarkModeTextColor = darkModeTextColor ?? Colors.white;
@@ -197,6 +200,11 @@ class _Paystack {
       context: context,
       builder: (BuildContext context) => Theme(
         data: Theme.of(context).copyWith(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: buttonColor,
+            ),
+          ),
           primaryColor: Theme.of(context).colorScheme.secondary,
           colorScheme: Theme.of(context).colorScheme.copyWith(
                 primary: Theme.of(context).colorScheme.secondary,
